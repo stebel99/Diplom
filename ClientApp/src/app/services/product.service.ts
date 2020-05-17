@@ -38,4 +38,8 @@ export class ProductService {
   insertProduct(newProduct: Product): Observable<Product> {
     return this.http.post<Product>(this.productUrl, newProduct);
   }
+
+  updateProduct(id: number, editProduct: Product): Observable<Product> {
+    return this.http.put<Product>(this.updateUrl + id, editProduct);
+  }
 }

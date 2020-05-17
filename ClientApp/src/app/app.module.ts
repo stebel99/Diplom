@@ -12,7 +12,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
-import { ProductUpdateComponent } from './products/product-update/product-update.component';
 
 
 
@@ -24,8 +23,7 @@ import { ProductUpdateComponent } from './products/product-update/product-update
     RegisterComponent,
     HomeComponent,
     ProductDetailsComponent,
-    ProductListComponent,
-    ProductUpdateComponent
+    ProductListComponent
   ],
   imports: [
     BrowserModule,

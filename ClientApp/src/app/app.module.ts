@@ -6,11 +6,11 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { ProductsComponent } from './products/products.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ProductDetailsComponent } from './products/product-details/product-details.component';
 
 
 
@@ -20,8 +20,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     NavMenuComponent,
     LoginComponent,
     RegisterComponent,
-    ProductsComponent,
-    HomeComponent
+    HomeComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

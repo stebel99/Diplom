@@ -18,4 +18,16 @@ export class ProductService {
   private deleteUrl: string = "/api/product/deleteproduct/";
 
   private updateUrl: string = "/api/product/updateproduct/";
+
+  private product$: Observable<Product[]>;
+
+  getProducts(): Observable<Product[]> {
+    if (!this.product$) {
+      this.product$ = this.http.get<Product[]>(this.baseUrl).pipe(shareReplay());
+    }
+
+    // if products cache exists return it
+    return this.product$;
+
+  }
 }

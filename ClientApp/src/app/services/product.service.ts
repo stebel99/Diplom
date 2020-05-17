@@ -35,4 +35,7 @@ export class ProductService {
     return this.getProducts().pipe(flatMap(result => result), first(product => product.productId == id));
   }
 
+  insertProduct(newProduct: Product): Observable<Product> {
+    return this.http.post<Product>(this.productUrl, newProduct);
+  }
 }

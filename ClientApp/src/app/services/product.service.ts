@@ -30,4 +30,9 @@ export class ProductService {
     return this.product$;
 
   }
+
+  getProductById(id: number): Observable<Product> {
+    return this.getProducts().pipe(flatMap(result => result), first(product => product.productId == id));
+  }
+
 }

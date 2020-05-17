@@ -9,7 +9,7 @@
         <th>Описание</th>
         <th>В наличии</th>
         <th>Цена (USD)</th>
-        <th>Картинка</th>
+        <th>Фото</th>
         <th>Действия</th>
       </tr>
     </thead>
@@ -101,7 +101,7 @@
             <input type="text" formControlName="imageUrl" class="form-control" placeholder="eg: https://i.imgur.com/ApYPYbQ.jpg" aria-label="ImageUrl" aria-describedby="productTitle">
           </div>
           <div class="errorMessage">
-            <span>Неверная сслыка на картинку.</span>
+            <span>Неверная сслыка на фото.</span>
           </div>
         </li>
         <li class="list-group-item">
@@ -193,7 +193,7 @@
           </div>
           <div *ngIf="_imageUrl.touched && _imageUrl.errors"
                class="errorMessage">
-            <span>Неверная сслыка на картинку.</span>
+            <span>Неверная сслыка на фото.</span>
           </div>
         </li>
         <li class="list-group-item">

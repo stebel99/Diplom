@@ -42,4 +42,8 @@ export class ProductService {
   updateProduct(id: number, editProduct: Product): Observable<Product> {
     return this.http.put<Product>(this.updateUrl + id, editProduct);
   }
+
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete(this.deleteUrl + id);
+  }
 }

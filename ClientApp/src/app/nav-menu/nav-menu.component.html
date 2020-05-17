@@ -1,0 +1,36 @@
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom mb-3">
+  
+      <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Device Store</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+        <ul class="navbar-nav flex-grow-2">
+          <li class="nav-item">
+            <a class="nav-link text-white" [routerLink]='["/"]'>Главная</a>
+          </li>
+          <li class="nav-item" *ngIf="(LoginStatus$ | async) as LoginStatus">
+            <a class="nav-link text-white" *ngIf="LoginStatus" [routerLink]='["/products"]'>Товары</a>
+          </li>
+          <li class="nav-item" *ngIf="!(LoginStatus$ | async) as LoginStatus">
+            <a class="nav-link text-white" *ngIf="LoginStatus" [routerLink]='["/login"]'>Вход</a>
+          </li>
+          <li class="nav-item" *ngIf="!(LoginStatus$ | async) as LoginStatus">
+            <a class="nav-link text-white" *ngIf="LoginStatus" [routerLink]='["/register"]'>Регистрация</a>
+          </li>
+          <li class="nav-item" *ngIf="(LoginStatus$ | async) as LoginStatus">
+            <a class="nav-link text-danger" *ngIf="(UserName$ | async) as UserName">{{UserName | uppercase}}</a>
+          </li>
+          <li class="nav-item" *ngIf="(LoginStatus$ | async) as LoginStatus">
+            <a class="btn btn-danger text-white" *ngIf="LoginStatus" (click)="onLogout()">Выход</a>
+          </li>
+  
+        </ul>
+  
+  
+      </div>
+  
+    </nav>
+  </header>

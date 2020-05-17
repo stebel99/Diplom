@@ -44,7 +44,7 @@
   </div>
   <div class="modal-body text-center">
     <p class="list-group-item active text-center text-uppercase"></p>
-    <form>
+    <form [formGroup]="insertForm">
       <ul class="list-group">
         <li class="list-group-item">
           <div class="input-group">
@@ -126,7 +126,7 @@
   </div>
   <div class="modal-body text-center">
     <p class="list-group-item active text-center text-uppercase"></p>
-    <form>
+    <form [formGroup]="updateForm">
       <ul class="list-group">
         <li class="list-group-item">
           <div class="input-group">

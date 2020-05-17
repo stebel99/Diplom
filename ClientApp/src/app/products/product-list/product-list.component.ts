@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { BsModalRef } from 'ngx-bootstrap/modal/ngx-bootstrap-modal';
+import { Product } from '../../interfaces/product';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -22,6 +25,20 @@ export class ProductListComponent implements OnInit {
   _description: FormControl;
   _imageUrl: FormControl;
   _id: FormControl;
+
+  // Add Modal
+  @ViewChild('template', {static:false} ) modal: TemplateRef<any>;
+
+  // Update Modal
+  @ViewChild('editTemplate', { static: false }) editmodal: TemplateRef<any>;
+
+  // Modal properties
+  modalMessage: string;
+  modalRef: BsModalRef;
+  selectedProduct: Product;
+  products$: Observable<Product[]>;
+  products: Product[] = [];
+  userRoleStatus: string;
 
   constructor() { }
 

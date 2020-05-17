@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
 
 
 
@@ -21,7 +22,8 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,

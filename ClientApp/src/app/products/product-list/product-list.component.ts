@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/ngx-bootstrap-modal';
 import { Product } from '../../interfaces/product';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
+
 
 @Component({
   selector: 'app-product-list',
@@ -39,6 +41,14 @@ export class ProductListComponent implements OnInit {
   products$: Observable<Product[]>;
   products: Product[] = [];
   userRoleStatus: string;
+
+
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+
+  @ViewChild(DataTableDirective, {static:false}) dtElement: DataTableDirective;
+
+
 
   constructor() { }
 

@@ -53,6 +53,15 @@ export class ProductListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 9,
+      autoWidth: true,
+      order: [[0, 'desc']]
+    };
+
+
   }
 
 }

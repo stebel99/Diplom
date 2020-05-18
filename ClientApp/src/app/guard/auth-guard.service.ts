@@ -24,8 +24,33 @@ export class AuthGuardService implements CanActivate  {
 
         return false;
       }
+      switch (destination) {
+        case '/products':
+        case '/products/' + productId:
+          {
+            if (localStorage.getItem("userRole") === "Customer" || localStorage.getItem("userRole") === "Admin" || localStorage.getItem("userRole") === "Moderator") {
+              return true;
+            }
+          }
 
-      return false;
+        case '/products/update':
+          {
+            if (localStorage.getItem("userRole") === "Customer" || localStorage.getItem("userRole") === "Moderator") {
+              this.router.navigate(['/access-denied'])
+
+              return false;
+            }
+
+            if (localStorage.getItem("userRole") === "Admin") {
+
+              return true;
+            }
+
+          }
+
+        default:
+          return false;
+      }           
     }))
   }
 }

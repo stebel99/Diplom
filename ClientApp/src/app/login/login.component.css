@@ -1,4 +1,6 @@
 /*Login CSS */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 .errorMessage {
   color: red;
 }

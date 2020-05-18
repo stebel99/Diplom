@@ -20,7 +20,7 @@
         <td>{{product.description}}</td>
         <td>{{true == product.outofstock ?  'Нет ': 'Да '}}</td>
         <td>{{product.price | currency: 'USD':'symbol-narrow':'.2'}}</td>
-        <td><img style="float:right" width="75" /></td>
+        <td><img [src]="product.imageUrl" *ngIf="product.imageUrl" style="float:right" width="75" /></td>
         <td>
           <div class="btn-group mt-2" role="group">
             <button type="button" class="btn btn-success"><i class="fas fa-list"></i></button>

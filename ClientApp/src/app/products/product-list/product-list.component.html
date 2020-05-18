@@ -33,8 +33,7 @@
   </table>
 </div>
 
-
-<!-- ADD PRODUCT MODAL START-->
+  <!-- ADD PRODUCT MODAL START-->
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title">Добавить новый товар</h4>
@@ -157,7 +156,7 @@
             <textarea formControlName="description" class="form-control" placeholder="Опишите товар - Максимум 150 Символов" aria-label="Description" aria-describedby="productDescription"></textarea>
           </div>
           <div *ngIf="_description.touched && _description.errors" class="errorMessage">
-            <span >Описание товара обязательно.</span>
+            <span>Описание товара обязательно.</span>
             <span>Не больше 150 символов для описания товара.</span>
           </div>
         </li>
@@ -179,9 +178,9 @@
             <input formControlName="price" type="text" class="form-control" placeholder="eg: 999.99">
           </div>
           <div class="errorMessage">
-            <span >Цена товара обязательна.         </span>
-            <span >Цена не может быть отрицательной. </span>
-            <span >Максимально допустимая цена 10000.</span>
+            <span>Цена товара обязательна.         </span>
+            <span>Цена не может быть отрицательной. </span>
+            <span>Максимально допустимая цена 10000.</span>
           </div>
         </li>
         <li class="list-group-item">

@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal/ngx-bootstrap-modal';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Product } from '../../interfaces/product';
 import { Observable, Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { ProductService } from '../../services/product.service';
+
 
 
 @Component({
@@ -29,11 +30,13 @@ export class ProductListComponent implements OnInit {
   _imageUrl: FormControl;
   _id: FormControl;
 
+
   // Add Modal
-  @ViewChild('template', {static:false} ) modal: TemplateRef<any>;
+  @ViewChild('template', {static:false}) modal: TemplateRef<any>;
 
   // Update Modal
   @ViewChild('editTemplate', { static: false }) editmodal: TemplateRef<any>;
+
 
   // Modal properties
   modalMessage: string;
@@ -44,25 +47,27 @@ export class ProductListComponent implements OnInit {
   userRoleStatus: string;
 
 
+  // Datatables Properties
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
-  @ViewChild(DataTableDirective, {static:false}) dtElement: DataTableDirective;
+  @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective;
+
 
 
 
   constructor(private productservice: ProductService) { }
 
   ngOnInit() {
-
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 9,
+      pageLength: 5,
       autoWidth: true,
       order: [[0, 'desc']]
     };
 
     this.products$ = this.productservice.getProducts();
+
     this.products$.subscribe(result => {
       this.products = result;
 

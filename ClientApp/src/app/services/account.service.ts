@@ -77,12 +77,15 @@ export class AccountService {
 
     var loginCookie = localStorage.getItem("loginStatus");
 
-
-
-    const token = localStorage.getItem('jwt');
-    const decoded = jwt_decode(token);
-
     if (loginCookie == "1") {
+
+      if (localStorage.getItem('jwt') === null || localStorage.getItem('jwt') === undefined) {
+
+        return false;
+      }
+      const token = localStorage.getItem('jwt');
+      const decoded = jwt_decode(token);
+
 
       if (decoded.exp === undefined) {
         return false;

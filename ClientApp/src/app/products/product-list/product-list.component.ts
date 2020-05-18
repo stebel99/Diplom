@@ -4,6 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/ngx-bootstrap-modal';
 import { Product } from '../../interfaces/product';
 import { Observable, Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
+import { ProductService } from '../../services/product.service';
 
 
 @Component({
@@ -50,7 +51,7 @@ export class ProductListComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(private productservice: ProductService) { }
 
   ngOnInit() {
 
@@ -60,6 +61,13 @@ export class ProductListComponent implements OnInit {
       autoWidth: true,
       order: [[0, 'desc']]
     };
+
+    this.products$ = this.productservice.getProducts();
+    this.products$.subscribe(result => {
+      this.products = result;
+
+      this.dtTrigger.next();
+    });
 
 
   }

@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccessDeniedComponent implements OnInit {
 
+  h2Message: string;
+  h1Message: string;
+
   constructor() { }
 
   ngOnInit() {
+    this.h1Message = "403";
+    this.h2Message = "Access Denied";
   }
 
 }

@@ -55,7 +55,8 @@ export class ProductListComponent implements OnInit {
 
 
   constructor(private productservice: ProductService,
-              private modalService: BsModalService
+              private modalService: BsModalService,
+              private fb: FormBuilder
   ) { }
 
   onAddProduct() {
@@ -84,6 +85,21 @@ export class ProductListComponent implements OnInit {
 
     let validateImageUrl: string = '^(https?:\/\/.*\.(?:png|jpg))$';
 
+
+    this.name = new FormControl('', [Validators.required, Validators.maxLength(50)]);
+    this.price = new FormControl('', [Validators.required, Validators.min(0), Validators.max(10000)]);
+    this.description = new FormControl('', [Validators.required, Validators.maxLength(150)]);
+    this.imageUrl = new FormControl('', [Validators.pattern(validateImageUrl)]);
+
+    this.insertForm = this.fb.group({
+
+      'name': this.name,
+      'price': this.price,
+      'description': this.description,
+      'imageUrl': this.imageUrl,
+      'outOfStock': true,
+
+    });
   }
 
 }

@@ -5,6 +5,8 @@ import { Product } from '../../interfaces/product';
 import { Observable, Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { ProductService } from '../../services/product.service';
+import { Router } from '@angular/router';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-product-list',
@@ -57,7 +59,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
   constructor(private productservice: ProductService,
               private modalService: BsModalService,
               private fb: FormBuilder,
-              private chRef: ChangeDetectorRef
+    private chRef: ChangeDetectorRef,
+    private router: Router,
+    private acct: AccountService
   ) { }
 
   onAddProduct() {
@@ -138,6 +142,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
     })
   }
 
+  onSelect(product: Product): void {
+    this.selectedProduct = product;
+
+    this.router.navigateByUrl("/products/" + product.productId);
+  }
+
 
 
 
@@ -169,6 +179,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
       this.dtTrigger.next();
     });
+
+    this.acct.currentUserRole.subscribe(result => { this.userRoleStatus = result });
+
 
     this.modalMessage = "Все поля обязательны к заполнению";
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Product } from '../../interfaces/product';
 import { Observable, Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
@@ -54,7 +54,15 @@ export class ProductListComponent implements OnInit {
 
 
 
-  constructor(private productservice: ProductService) { }
+  constructor(private productservice: ProductService,
+              private modalService: BsModalService
+  ) { }
+
+  onAddProduct() {
+    this.modalRef = this.modalService.show(this.modal);
+  }
+
+
 
   ngOnInit() {
     this.dtOptions = {

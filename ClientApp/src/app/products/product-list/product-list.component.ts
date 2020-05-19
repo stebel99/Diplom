@@ -126,7 +126,17 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   }
 
+  onDelete(product: Product): void {
+    this.productservice.deleteProduct(product.productId).subscribe(result => {
+      this.productservice.clearCache();
+      this.products$ = this.productservice.getProducts();
+      this.products$.subscribe(newlist => {
+        this.products = newlist;
 
+        this.rerender();
+      })
+    })
+  }
 
 
 

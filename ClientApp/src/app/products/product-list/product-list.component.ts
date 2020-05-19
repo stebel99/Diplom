@@ -63,7 +63,28 @@ export class ProductListComponent implements OnInit {
     this.modalRef = this.modalService.show(this.modal);
   }
 
+  onSubmit() {
+    let newProduct = this.insertForm.value;
 
+    this.productservice.insertProduct(newProduct).subscribe(
+      result => {
+        this.productservice.clearCache();
+        this.products$ = this.productservice.getProducts();
+
+        this.products$.subscribe(newlist => {
+          this.products = newlist;
+          this.modalRef.hide();
+          this.insertForm.reset();
+          this.dtTrigger.next();
+        });
+        console.log("New Product added");
+
+      },
+      error => console.log('Could not add Product')
+
+    )
+
+  }
 
   ngOnInit() {
     this.dtOptions = {

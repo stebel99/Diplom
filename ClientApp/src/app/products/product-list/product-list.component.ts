@@ -80,6 +80,9 @@ export class ProductListComponent implements OnInit {
       this.dtTrigger.next();
     });
 
+    this.modalMessage = "Все поля обязательны к заполнению";
+
+    let validateImageUrl: string = '^(https?:\/\/.*\.(?:png|jpg))$';
 
   }
 

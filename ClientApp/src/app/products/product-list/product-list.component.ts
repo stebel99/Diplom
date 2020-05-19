@@ -106,7 +106,25 @@ export class ProductListComponent implements OnInit, OnDestroy {
     )
   }
 
+  onUpdateModal(productEdit: Product): void {
+    this._id.setValue(productEdit.productId);
+    this._name.setValue(productEdit.name);
+    this._price.setValue(productEdit.price);
+    this._description.setValue(productEdit.description);
+    this._imageUrl.setValue(productEdit.imageUrl);
 
+    this.updateForm.setValue({
+      'id': this._id.value,
+      'name': this._name.value,
+      'price': this._price.value,
+      'description': this._description.value,
+      'imageUrl': this._imageUrl.value,
+      'outOfStock': true
+    });
+
+    this.modalRef = this.modalService.show(this.editmodal);
+
+  }
 
 
 
@@ -169,6 +187,19 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this._description = new FormControl('', [Validators.required, Validators.maxLength(150)]);
     this._imageUrl = new FormControl('', [Validators.required, Validators.pattern(validateImageUrl)]);
     this._id = new FormControl();
+
+    this.updateForm = this.fb.group(
+      {
+        'id': this._id,
+        'name': this._name,
+        'price': this._price,
+        'description': this._description,
+        'imageUrl': this._imageUrl,
+        'outOfStock': true
+
+      });
+
+
   }
 
   ngOnDestroy() {

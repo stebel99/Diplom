@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Product } from '../../interfaces/product';
@@ -56,7 +56,8 @@ export class ProductListComponent implements OnInit {
 
   constructor(private productservice: ProductService,
               private modalService: BsModalService,
-              private fb: FormBuilder
+              private fb: FormBuilder,
+              private chRef: ChangeDetectorRef
   ) { }
 
   onAddProduct() {
@@ -75,7 +76,8 @@ export class ProductListComponent implements OnInit {
           this.products = newlist;
           this.modalRef.hide();
           this.insertForm.reset();
-          this.dtTrigger.next();
+          this.rerender();
+
         });
         console.log("New Product added");
 
@@ -84,6 +86,17 @@ export class ProductListComponent implements OnInit {
 
     )
 
+  }
+
+  rerender() {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first in the current context
+      dtInstance.destroy();
+
+      // Call the dtTrigger to rerender again
+      this.dtTrigger.next();
+
+    });
   }
 
   ngOnInit() {
@@ -98,6 +111,8 @@ export class ProductListComponent implements OnInit {
 
     this.products$.subscribe(result => {
       this.products = result;
+
+      this.chRef.detectChanges();
 
       this.dtTrigger.next();
     });

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Product } from '../../interfaces/product';
@@ -11,7 +11,7 @@ import { ProductService } from '../../services/product.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
 
   // For the FormControl - Adding products
   insertForm: FormGroup;
@@ -88,6 +88,31 @@ export class ProductListComponent implements OnInit {
 
   }
 
+  onUpdate() {
+    let editProduct = this.updateForm.value;
+    this.productservice.updateProduct(editProduct.id, editProduct).subscribe(
+      result => {
+        console.log('Product Updated');
+        this.productservice.clearCache();
+        this.products$ = this.productservice.getProducts();
+        this.products$.subscribe(updatedlist => {
+          this.products = updatedlist;
+
+          this.modalRef.hide();
+          this.rerender();
+        });
+      },
+      error => console.log('Could Not Update Product')
+    )
+  }
+
+
+
+
+
+
+
+
   rerender() {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       // Destroy the table first in the current context
@@ -125,7 +150,7 @@ export class ProductListComponent implements OnInit {
     this.name = new FormControl('', [Validators.required, Validators.maxLength(50)]);
     this.price = new FormControl('', [Validators.required, Validators.min(0), Validators.max(10000)]);
     this.description = new FormControl('', [Validators.required, Validators.maxLength(150)]);
-    this.imageUrl = new FormControl('', [Validators.pattern(validateImageUrl)]);
+    this.imageUrl = new FormControl('', [Validators.required, Validators.pattern(validateImageUrl)]);
 
     this.insertForm = this.fb.group({
 
@@ -136,6 +161,10 @@ export class ProductListComponent implements OnInit {
       'outOfStock': true,
 
     });
+  }
+
+  ngOnDestroy() {
+    this.dtTrigger.unsubscribe();
   }
 
 }

@@ -101,10 +101,11 @@
           </div>
           <div class="errorMessage" *ngIf="imageUrl.touched && imageUrl.errors">
             <span *ngIf="imageUrl.hasError('pattern')">Неверная сслыка на фото.</span>
+            <span *ngIf="imageUrl.hasError('required')">Фото товара обязательно.</span>
           </div>
         </li>
         <li class="list-group-item">
-          <button [disabled]="insertForm.invalid" class="btn btn-primary btn-block">Добавить</button>
+          <button type="submit" [disabled]="insertForm.invalid" class="btn btn-primary btn-block">Добавить</button>
         </li>
       </ul>
 

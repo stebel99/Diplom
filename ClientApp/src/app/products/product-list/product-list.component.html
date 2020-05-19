@@ -37,13 +37,13 @@
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title">Добавить новый товар</h4>
-    <button type="button" class="close pull-right" aria-label="Close">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body text-center">
-    <p class="list-group-item active text-center text-uppercase"></p>
-    <form [formGroup]="insertForm">
+    <p class="list-group-item active text-center text-uppercase">{{modalMessage}}</p>
+    <form [formGroup]="insertForm" (ngSubmit)="onSubmit()">
       <ul class="list-group">
         <li class="list-group-item">
           <div class="input-group">
@@ -52,9 +52,9 @@
             </div>
             <input type="text" id="name" formControlName="name" class="form-control" placeholder="eg: Macbook Air 2019" aria-label="name" aria-describedby="productTitle">
           </div>
-          <div class="errorMessage">
-            <span>Название товара обязательно.</span>
-            <span>Не больше 50 символов для названия товара.</span>
+          <div class="errorMessage" *ngIf="name.touched && name.errors">
+            <span *ngIf="name.hasError('required')">Название товара обязательно.</span>
+            <span *ngIf="name.hasError('maxlength')">Не больше 50 символов для названия товара.</span>
           </div>
         </li>
         <li class="list-group-item">
@@ -64,9 +64,9 @@
             </div>
             <textarea formControlName="description" class="form-control" placeholder="Опишите товар - Максимум 150 Символов" aria-label="Description" aria-describedby="productDescription"></textarea>
           </div>
-          <div class="errorMessage">
-            <span>Описание товара обязательно.</span>
-            <span>Не больше 150 символов для описания товара.</span>
+          <div class="errorMessage" *ngIf="description.touched && description.errors">
+            <span *ngIf="description.hasError('required')">Описание товара обязательно.</span>
+            <span *ngIf="description.hasError('maxlength')">Не больше 150 символов для описания товара.</span>
           </div>
         </li>
         <li class="list-group-item">
@@ -86,10 +86,10 @@
             </div>
             <input formControlName="price" type="text" class="form-control" placeholder="eg: 999.99">
           </div>
-          <div class="errorMessage">
-            <span>Цена товара обязательна.         </span>
-            <span>Цена не может быть отрицательной. </span>
-            <span>Максимально допустимая цена 10000.</span>
+          <div class="errorMessage" *ngIf="price.touched && price.errors">
+            <span *ngIf="price.hasError('required')">Цена товара обязательна.         </span>
+            <span *ngIf="price.hasError('min')">Цена не может быть отрицательной. </span>
+            <span *ngIf="price.hasError('max')">Максимально допустимая цена 10000.</span>
           </div>
         </li>
         <li class="list-group-item">
@@ -99,12 +99,12 @@
             </div>
             <input type="text" formControlName="imageUrl" class="form-control" placeholder="eg: https://i.imgur.com/ApYPYbQ.jpg" aria-label="ImageUrl" aria-describedby="productTitle">
           </div>
-          <div class="errorMessage">
-            <span>Неверная сслыка на фото.</span>
+          <div class="errorMessage" *ngIf="imageUrl.touched && imageUrl.errors">
+            <span *ngIf="imageUrl.hasError('pattern')">Неверная сслыка на фото.</span>
           </div>
         </li>
         <li class="list-group-item">
-          <button class="btn btn-primary btn-block">Добавить</button>
+          <button [disabled]="insertForm.invalid" class="btn btn-primary btn-block">Добавить</button>
         </li>
       </ul>
 

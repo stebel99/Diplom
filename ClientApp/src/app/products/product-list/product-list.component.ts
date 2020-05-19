@@ -161,6 +161,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
       'outOfStock': true,
 
     });
+
+
+    // Initializing Update Product properties
+    this._name = new FormControl('', [Validators.required, Validators.maxLength(50)]);
+    this._price = new FormControl('', [Validators.required, Validators.min(0), Validators.max(10000)]);
+    this._description = new FormControl('', [Validators.required, Validators.maxLength(150)]);
+    this._imageUrl = new FormControl('', [Validators.required, Validators.pattern(validateImageUrl)]);
+    this._id = new FormControl();
   }
 
   ngOnDestroy() {

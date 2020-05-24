@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Device_Store.Models
 {
@@ -23,5 +24,7 @@ namespace Device_Store.Models
 
         [Required]
         public double Price { get; set; }
+
+        public List<OrderProductModel> OrderProducts { get; set; }
     }
 }

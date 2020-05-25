@@ -25,6 +25,6 @@ namespace Device_Store.Models
         [Required]
         public double Price { get; set; }
 
-        public List<OrderProductModel> OrderProducts { get; set; }
+        public virtual List<OrderProductModel> OrderProducts { get; set; }
     }
 }

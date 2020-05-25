@@ -21,9 +21,9 @@ namespace Device_Store.Controllers
     [Route("api/[controller]")]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<UserModel> _userManager;
 
-        private readonly SignInManager<IdentityUser> _signManager;
+        private readonly SignInManager<UserModel> _signManager;
 
         private readonly AppSettings _appSettings;
 
@@ -31,8 +31,8 @@ namespace Device_Store.Controllers
 
 
         public AccountController(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signManager, 
+            UserManager<UserModel> userManager,
+            SignInManager<UserModel> signManager, 
             IOptions<AppSettings> appSettings,
             IMailService mailService
             )
@@ -49,7 +49,7 @@ namespace Device_Store.Controllers
             //Will hold all the errors related to registration
             List<string> errorList = new List<string>();
 
-            var user = new IdentityUser
+            var user = new UserModel
             {
                 Email = formdata.Email,
                 UserName = formdata.UserName,

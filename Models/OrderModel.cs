@@ -19,6 +19,6 @@ namespace Device_Store.Models
         public string UserId { get; set; }
         public UserModel User{ get; set; }
 
-        public List<OrderProductModel> OrderProducts { get; set; }
+        public virtual List<OrderProductModel> OrderProducts { get; set; }
     }
 }

@@ -1,7 +1,7 @@
-<div class="container-fluid">
+<div class="container-fluid test">
 
   <button class="btn btn-warning mb-3 float-right text-uppercase" *ngIf="userRoleStatus == 'Admin'" (click)="onAddProduct()"><i class="fa fa-plus"></i> Add Product</button>
-  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered row-border hover table-responsive-xl" style="width:100%">
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered row-border hover table-responsive" style="width:100%">
     <thead class="text-center thead-dark">
       <tr>
         <th>Id</th>
@@ -20,7 +20,7 @@
         <td>{{product.description}}</td>
         <td>{{true == product.outofstock ?  'Нет ': 'Да '}}</td>
         <td>{{product.price | currency: 'USD':'symbol-narrow':'.2'}}</td>
-        <td><img [src]="product.imageUrl" *ngIf="product.imageUrl" style="float:right" width="75" /></td>
+        <td><img [src]="product.imageUrl" *ngIf="product.imageUrl" style="" width="75" /></td>
         <td>
           <div class="btn-group mt-2" role="group">
             <button type="button" class="btn btn-success" (click)="onSelect(product)"><i class="fas fa-th-list"></i></button>

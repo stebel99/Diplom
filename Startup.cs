@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using Device_Store.Helpers;
 using System.Text;
 using Device_Store.Services;
+using Device_Store.Models;
 
 namespace Device_Store
 {
@@ -29,9 +30,10 @@ namespace Device_Store
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddNewtonsoftJson();
+            services.AddControllersWithViews().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddTransient<IMailService, SendGridMailService>();
+
 
 
 
@@ -53,7 +55,7 @@ namespace Device_Store
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             //Going to use Idetity Framework
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<UserModel, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 6;
